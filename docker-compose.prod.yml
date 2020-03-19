@@ -1,0 +1,18 @@
+version: '3.7'
+networks:
+  routing:
+    driver: bridge
+services:
+  traefik:
+    image: traefik:2.1.6
+    container_name: traefik
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./configs/traefik.yml:/etc/traefik/traefik.yml
+      - ./configs/dynamic:/etc/traefik/dynamic
+      - ./certificates/acme.json:/etc/traefik/acme/acme.json
+    networks:
+      - routing

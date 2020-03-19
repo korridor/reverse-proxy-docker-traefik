@@ -1,0 +1,23 @@
+http:
+  routers:
+    traefik:
+      rule: Host(`reverse-proxy.somedomain.com`)
+      entryPoints:
+        - websecure
+      service: api@internal
+      middlewares:
+        - dashboardauth
+      tls:
+        certResolver: letsencrypt
+    traefik-http-redirect:
+      rule: Host(`reverse-proxy.somedomain.com`)
+      entryPoints:
+        - web
+      service: api@internal
+      middlewares:
+        - "redirect-to-https"
+  middlewares:
+    dashboardauth:
+      basicAuth:
+        users:
+          - "admin:$$2y$$10$$6iP302D5HyQSRH0Mql/kmeCfAS9yJLiPCGNvewxr93XNZAADvMMCK"
