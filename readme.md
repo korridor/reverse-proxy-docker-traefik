@@ -2,7 +2,7 @@
 
 This is a resuseable traefik config for usage on a vServer using docker-compose.
 It uses:
- - Traefik 2.1.6
+ - Traefik 2.1
  - docker-compose
  - Let's encrypt
 
@@ -12,14 +12,57 @@ It uses:
 2. Copy default config  
    ```bash
    cp docker-compose.prod.yml docker-compose.yml
-   cp configs-prod configs
+   cp -r configs-prod configs
    echo "{}" > certificates/acme.json
    chmod 600 certificates/acme.json
    ```
-3. Replace domain for dashboard (`reverse-proxy.somedomain.com` in `config/dynamic/dashboard.yml`)
-4. Replace password for admin account (in `config/dynamic/dashboard.yml`)   
-    You can use a website like [this](https://hostingcanada.org/htpasswd-generator/) to generate the hash. Do not forget to escape dollar signs by doubling them. (`$` -> `$$`)
-5. Replace email for Let's encrypt (`mail@somedomain.com` in `config/traefik.yml`)
+3. Replace domain for dashboard (`reverse-proxy.somedomain.com` in `configs/dynamic/dashboard.yml`)
+   ```yaml
+   http:
+     routers:
+       traefik:
+         rule: Host(`reverse-proxy.somedomain.com`)
+         # ...
+       traefik-http-redirect:
+         rule: Host(`reverse-proxy.somedomain.com`)
+         # ...
+   ```
+4. Replace password for admin account (in `configs/dynamic/dashboard.yml`) 
+    ```yaml
+   http:
+     # ...
+     middlewares:
+       dashboardauth:
+         basicAuth:
+           users:
+             - "user1:$2y$05$/x10KYbrHtswyR8POT.ny.H4fFd1n.0.IEiYiestWzE1QFkYIEI3m"
+    ```  
+     - You can use a website like [this](https://hostingcanada.org/htpasswd-generator/) to generate the hash (use Bcrypt).
+     - Or generate it with: `echo $(htpasswd -nB user1)`
+5. Replace email for Let's encrypt (`mail@somedomain.com` in `configs/traefik.yml`)
+    ```yaml
+    certificatesResolvers:
+      letsencrypt:
+        acme:
+          # ...
+          email: mail@somedomain.com
+    ```
+6. Start container
+   ```bash
+   docker-compose up -d
+   ```
+7. Check that traefik is running smoothly
+   ```bash
+   docker-compose logs
+   ```
+
+### Traefik dashboard
+
+The traefik dashboard is now available under:
+```
+https://reverse-proxy.somedomain.com
+```
+The dashboard shows you the configured routers, services, middlewares, etc.
 
 ### Connect docker-compose service to reverse-proxy
 
@@ -28,13 +71,13 @@ version: '3.7'
 networks:
   frontend:
     external:
-      name: traefik_routing
+      name: reverse-proxy-docker-traefik_routing
 services:
   someservice:
     # ...
     labels:
       traefik.enable: "true"
-      traefik.docker.network: "traefik_routing"
+      traefik.docker.network: "reverse-proxy-docker-traefik_routing"
       # https
       traefik.http.routers.someservice.rule: "Host(`someservice.com`)"
       traefik.http.routers.someservice.tls: "true"

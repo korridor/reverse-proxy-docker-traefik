@@ -20,4 +20,4 @@ http:
     dashboardauth:
       basicAuth:
         users:
-          - "admin:$$2y$$10$$6iP302D5HyQSRH0Mql/kmeCfAS9yJLiPCGNvewxr93XNZAADvMMCK"
+          - "user1:$2y$05$/x10KYbrHtswyR8POT.ny.H4fFd1n.0.IEiYiestWzE1QFkYIEI3m"
