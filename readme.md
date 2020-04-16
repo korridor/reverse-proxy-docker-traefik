@@ -9,16 +9,20 @@ It uses:
 
 ## Table of content
 
-* [Setup production](#setup-production)
- + [Traefik dashboard](#traefik-dashboard)
- + [Connect docker-compose service to reverse-proxy](#connect-docker-compose-service-to-reverse-proxy)
+* [Production setup](#production-setup)
+  + [Setting up traefik](#setting-up-traefik)
+  + [Traefik dashboard](#traefik-dashboard)
+  + [Connect docker-compose service to reverse-proxy](#connect-docker-compose-service-to-reverse-proxy)
 * [Setup for local development](#setup-for-local-development)
- + [Traefik dashboard](#traefik-dashboard-1)
- + [Connect docker-compose service to reverse-proxy](#connect-docker-compose-service-to-reverse-proxy-1)
+  + [Setting up traefik](#setting-up-traefik-1)
+  + [Traefik dashboard](#traefik-dashboard-1)
+  + [Connect docker-compose service to reverse-proxy](#connect-docker-compose-service-to-reverse-proxy-1)
 * [Credits](#credits)
 * [License](#license)
 
-## Setup production
+## Production setup
+
+### Setting up traefik
 
 1. Clone repository
    ```bash
@@ -139,6 +143,8 @@ services:
 ```
 
 ## Setup for local development
+
+### Setting up traefik
 
 1. Clone repository
    ```bash
