@@ -1,7 +1,10 @@
 version: '3.7'
 networks:
   routing:
-    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 10.100.100.0/24
 services:
   traefik:
     image: traefik:2.2.0
@@ -9,11 +12,10 @@ services:
     container_name: reverse_proxy_traefik
     ports:
       - 80:80
-      - 443:443
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - ./configs/traefik.yml:/etc/traefik/traefik.yml
       - ./configs/dynamic:/etc/traefik/dynamic
-      - ./certificates/acme.json:/etc/traefik/acme/acme.json
     networks:
-      - routing
+      routing:
+        ipv4_address: 10.100.100.10

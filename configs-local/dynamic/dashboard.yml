@@ -1,0 +1,7 @@
+http:
+  routers:
+    traefik:
+      rule: Host(`reverse-proxy.test`)
+      entryPoints:
+        - web
+      service: api@internal
