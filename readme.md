@@ -188,6 +188,11 @@ http://reverse-proxy.test
 ```
 The dashboard shows you the configured routers, services, middlewares, etc.
 
+### Add redirects for all *.test domains to traefik
+
+DNSMasq is pre-installed and configured to redirect all *.test domains to traefik. 
+To use it you have to add `127.0.0.1` as an DNS Server in your OS Settings.  
+
 ### Connect docker-compose service to reverse-proxy
 
 ```yaml

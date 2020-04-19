@@ -19,3 +19,14 @@ services:
     networks:
       routing:
         ipv4_address: 10.100.100.10
+  dnsmasq:
+    image: jpillora/dnsmasq:1.1.0
+    restart: always
+    container_name: reverse_proxy_dnsmasq
+    ports:
+      - 53:53/udp
+    volumes:
+      - ./configs/dnsmasq.conf:/etc/dnsmasq.conf
+    networks:
+      routing:
+        ipv4_address: 10.100.100.12
