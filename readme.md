@@ -6,6 +6,7 @@ It uses:
  - Traefik 2.2
  - docker-compose
  - Let's encrypt
+ - DNSMasq
 
 ## Table of content
 
@@ -191,7 +192,13 @@ The dashboard shows you the configured routers, services, middlewares, etc.
 ### Add redirects for all *.test domains to traefik
 
 DNSMasq is pre-installed and configured to redirect all *.test domains to traefik. 
-To use it you have to add `127.0.0.1` as an DNS Server in your OS Settings.  
+To use DNSMasq for your *.test domains you can configure a resolver like this:
+```bash
+sudo mkdir /etc/resolver
+sudo touch /etc/resolver/test 
+echo "nameserver 0.0.0.0" | sudo tee /etc/resolver/test
+```
+Alternatively you can configure `127.0.0.1` as an DNS Server in your OS Settings. 
 
 ### Connect docker-compose service to reverse-proxy
 
