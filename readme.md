@@ -192,13 +192,14 @@ The dashboard shows you the configured routers, services, middlewares, etc.
 ### Add redirects for all *.test domains to traefik
 
 DNSMasq is pre-installed and configured to redirect all *.test domains to traefik. 
-To use DNSMasq for your *.test domains you can configure a resolver like this:
+To use DNSMasq for your *.test domains you can configure a resolver like this on macOS:
 ```bash
 sudo mkdir /etc/resolver
 sudo touch /etc/resolver/test 
 echo "nameserver 0.0.0.0" | sudo tee /etc/resolver/test
 ```
-Alternatively you can configure `127.0.0.1` as an DNS Server in your OS Settings. 
+On other systems you can configure `127.0.0.1` as a DNS Server in your OS Settings. 
+The default fallback DNS Server is Cloudflare `1.0.0.1` and `1.1.1.1`. Feel free to change it in `configs/dnsmasq.conf`.
 
 ### Connect docker-compose service to reverse-proxy
 
