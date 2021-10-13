@@ -235,6 +235,57 @@ services:
       - "traefik.http.services.someservice.loadbalancer.server.port=8080"
 ```
 
+### Enable SSL locally
+
+1. Install [mkcert](https://github.com/FiloSottile/mkcert)
+
+For example on macOS:
+
+```bash
+brew install mkcert
+brew install nss # if you use Firefox
+```
+
+Now install the local CA:
+
+```bash
+mkcert -install
+```
+
+3. Generate certificate
+
+Replace `someservice` with the domains that you are using for local development.
+
+```bash
+cd certificates
+mkcert -key-file local.key.pem -cert-file local.cert.pem "*.local" "*.test" "*.someservice.test" "*.someservice.local"
+```
+
+### Enable SSL in the docker-compose file
+
+```yaml
+version: '3.7'
+networks:
+  frontend:
+    external:
+      name: reverse-proxy-docker-traefik_routing
+services:
+  someservice:
+    restart: always
+    # ...
+    labels:
+      - ...
+      # http
+      - ...
+      # https
+      - "traefik.http.routers.someservice-https.rule=Host(`someservice.test`)"
+      - "traefik.http.routers.someservice-https.entrypoints=websecure"
+      - "traefik.http.routers.someservice-https.tls=true"
+    networks:
+     - frontend
+     - ...
+```
+
 ## Credits
 
 I used the following resources to create this setup:

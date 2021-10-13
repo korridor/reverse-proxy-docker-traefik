@@ -1,4 +1,4 @@
-certificates/acme.json
+certificates/*
 .idea
 docker-compose.yml
 configs
