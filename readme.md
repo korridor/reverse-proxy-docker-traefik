@@ -1,9 +1,9 @@
 # Traefik 2 config
 
 
-This is a resuseable traefik config for usage on a vServer using docker-compose.
+This is a resuseable traefik config for usage on a virtual server or for local debelopment using docker-compose.   
 It uses:
- - Traefik 2.2
+ - Traefik 2
  - docker-compose
  - Let's encrypt
 
@@ -87,7 +87,7 @@ The dashboard shows you the configured routers, services, middleware, etc.
 ### Connect docker-compose service to reverse-proxy
 
 ```yaml
-version: '3.7'
+version: '3.8'
 networks:
   frontend:
     external:
@@ -191,7 +191,7 @@ The dashboard shows you the configured routers, services, middlewares, etc.
 ### Connect docker-compose service to reverse-proxy
 
 ```yaml
-version: '3.7'
+version: '3.8'
 networks:
   frontend:
     external:
@@ -264,7 +264,7 @@ mkcert -key-file local.key.pem -cert-file local.cert.pem "*.local" "*.test" "*.s
 ### Enable SSL in the docker-compose file
 
 ```yaml
-version: '3.7'
+version: '3.8'
 networks:
   frontend:
     external:
