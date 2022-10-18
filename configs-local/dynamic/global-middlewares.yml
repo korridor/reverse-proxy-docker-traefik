@@ -4,3 +4,15 @@ http:
       redirectScheme:
         scheme: https
         permanent: true
+    hsts-minimal:
+      headers:
+        stsSeconds: 31536000
+        stsIncludeSubdomains: false
+        stsPreload: false
+        forceSTSHeader: true
+    hsts-full:
+      headers:
+        stsSeconds: 31536000
+        stsIncludeSubdomains: true
+        stsPreload: true
+        forceSTSHeader: true

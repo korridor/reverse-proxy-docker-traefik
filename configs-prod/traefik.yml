@@ -1,10 +1,17 @@
 ## static configuration
 
+global:
+  # Send anonymous usage data
+  sendAnonymousUsage: false
+
 entryPoints:
   web:
     address: ":80"
   websecure:
     address: ":443"
+
+# Access logs
+# accessLog: {}
 
 providers:
   docker:

@@ -9,16 +9,20 @@ It uses:
 
 ## Table of content
 
-* [Production setup](#production-setup)
-  + [Setting up traefik](#setting-up-traefik)
-  + [Traefik dashboard](#traefik-dashboard)
-  + [Connect docker-compose service to reverse-proxy](#connect-docker-compose-service-to-reverse-proxy)
-* [Setup for local development](#setup-for-local-development)
-  + [Setting up traefik](#setting-up-traefik-1)
-  + [Traefik dashboard](#traefik-dashboard-1)
-  + [Connect docker-compose service to reverse-proxy](#connect-docker-compose-service-to-reverse-proxy-1)
-* [Credits](#credits)
-* [License](#license)
+- [Production setup](#production-setup)
+    * [Setting up traefik](#setting-up-traefik)
+    * [Traefik dashboard](#traefik-dashboard)
+    * [Connect docker-compose service to reverse-proxy](#connect-docker-compose-service-to-reverse-proxy)
+    * [SSL configuration](#ssl-configuration)
+    * [Global middlewares](#global-middlewares)
+- [Setup for local development](#setup-for-local-development)
+    * [Setting up traefik](#setting-up-traefik-1)
+    * [Traefik dashboard](#traefik-dashboard-1)
+    * [Connect docker-compose service to reverse-proxy](#connect-docker-compose-service-to-reverse-proxy-1)
+    * [Enable SSL locally](#enable-ssl-locally)
+    * [Enable SSL in the docker-compose file](#enable-ssl-in-the-docker-compose-file)
+- [Credits](#credits)
+- [License](#license)
 
 ## Production setup
 
@@ -141,6 +145,30 @@ services:
       # ...
       - "traefik.http.services.someservice.loadbalancer.server.port=8080"
 ```
+
+### SSL configuration
+
+Per default the SSL configuration is set so that [SSL Labs](https://www.ssllabs.com/) gives an `A` rating.
+
+If you want an `A+` rating, you need to use HSTS (HTTP Strict Transport Security).
+The setup includes a global middleware called `hsts-minimal@file` that can be used to activate HSTS in a simple setting.
+See "Global middlewares" for more information.
+
+### Global middlewares
+
+**hsts-minimal@file**
+
+Adds the HSTS header to the HTTP response without `includeSubDomains` and `preload`.
+The `max-age` is set to one year / 31536000 seconds.
+
+**hsts-full@file**
+
+Adds the HSTS header to the HTTP response with `includeSubDomains` and `preload`.
+The `max-age` is set to one year / 31536000 seconds.
+
+**redirect-to-https@file**
+
+Adds a permanent redirect to HTTPS.
 
 ## Setup for local development
 

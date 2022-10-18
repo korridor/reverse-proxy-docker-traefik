@@ -7,7 +7,7 @@ networks:
         - subnet: 10.100.100.0/24
 services:
   traefik:
-    image: traefik:2.7.0
+    image: traefik:2.9.1
     restart: always
     container_name: reverse_proxy_traefik
     ports:
