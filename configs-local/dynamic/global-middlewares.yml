@@ -10,6 +10,12 @@ http:
         stsIncludeSubdomains: false
         stsPreload: false
         forceSTSHeader: true
+    hsts-standard:
+      headers:
+        stsSeconds: 31536000
+        stsIncludeSubdomains: true
+        stsPreload: false
+        forceSTSHeader: true
     hsts-full:
       headers:
         stsSeconds: 31536000

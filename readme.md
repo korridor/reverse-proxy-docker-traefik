@@ -161,6 +161,11 @@ See "Global middlewares" for more information.
 Adds the HSTS header to the HTTP response without `includeSubDomains` and `preload`.
 The `max-age` is set to one year / 31536000 seconds.
 
+**hsts-standard@file**
+
+Adds the HSTS header to the HTTP response with `includeSubDomains` and no `preload`.
+The `max-age` is set to one year / 31536000 seconds.
+
 **hsts-full@file**
 
 Adds the HSTS header to the HTTP response with `includeSubDomains` and `preload`.
