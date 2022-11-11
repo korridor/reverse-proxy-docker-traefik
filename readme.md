@@ -9,20 +9,23 @@ It uses:
 
 ## Table of content
 
-- [Production setup](#production-setup)
-    * [Setting up traefik](#setting-up-traefik)
-    * [Traefik dashboard](#traefik-dashboard)
-    * [Connect docker-compose service to reverse-proxy](#connect-docker-compose-service-to-reverse-proxy)
-    * [SSL configuration](#ssl-configuration)
-    * [Global middlewares](#global-middlewares)
-- [Setup for local development](#setup-for-local-development)
-    * [Setting up traefik](#setting-up-traefik-1)
-    * [Traefik dashboard](#traefik-dashboard-1)
-    * [Connect docker-compose service to reverse-proxy](#connect-docker-compose-service-to-reverse-proxy-1)
-    * [Enable SSL locally](#enable-ssl-locally)
-    * [Enable SSL in the docker-compose file](#enable-ssl-in-the-docker-compose-file)
-- [Credits](#credits)
-- [License](#license)
+- [Traefik 2 config](#traefik-2-config)
+  - [Table of content](#table-of-content)
+  - [Production setup](#production-setup)
+    - [Setting up traefik](#setting-up-traefik)
+    - [Traefik dashboard](#traefik-dashboard)
+    - [Connect docker-compose service to reverse-proxy](#connect-docker-compose-service-to-reverse-proxy)
+    - [SSL configuration](#ssl-configuration)
+    - [Global middlewares](#global-middlewares)
+    - [Access Logs](#access-logs)
+  - [Setup for local development](#setup-for-local-development)
+    - [Setting up traefik](#setting-up-traefik-1)
+    - [Traefik dashboard](#traefik-dashboard-1)
+    - [Connect docker-compose service to reverse-proxy](#connect-docker-compose-service-to-reverse-proxy-1)
+    - [Enable SSL locally](#enable-ssl-locally)
+    - [Enable SSL in the docker-compose file](#enable-ssl-in-the-docker-compose-file)
+  - [Credits](#credits)
+  - [License](#license)
 
 ## Production setup
 
@@ -174,6 +177,15 @@ The `max-age` is set to one year / 31536000 seconds.
 **redirect-to-https@file**
 
 Adds a permanent redirect to HTTPS.
+
+### Access Logs
+
+To enable the traefik access logs in the production configuration, open the file `traefik.yml` within the config folder and uncomment the `accessLog` section.
+
+```yml
+# Access logs
+accessLog: {}
+```
 
 ## Setup for local development
 
