@@ -11,7 +11,10 @@ entryPoints:
     address: ":443"
 
 # Access logs
-accessLog: {}
+# accessLog: fields:
+#   headers:
+#     names:
+#       User-Agent: keep
 
 providers:
   docker:
