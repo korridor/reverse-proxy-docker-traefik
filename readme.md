@@ -178,6 +178,20 @@ The `max-age` is set to one year / 31536000 seconds.
 
 Adds a permanent redirect to HTTPS.
 
+**redirect-non-www-to-www@file**
+
+Adds a permanent redirect (HTTP 301) from non-www domains to the HTTPS www domain
+Examples:
+- `https://example.test` -> `https://www.example.test`
+- `http://example.test` -> `https://www.example.test`
+
+**redirect-www-to-non-www@file**
+
+Adds a permanent redirect (HTTP 301) from www domains to the HTTPS non-www domain
+Examples:
+- `https://www.example.test` -> `https://example.test`
+- `http://www.example.test` -> `https://example.test`
+
 ### Access Logs
 
 To enable the traefik access logs in the production configuration, open the file `traefik.yml` within the config folder and uncomment the `accessLog` section.
