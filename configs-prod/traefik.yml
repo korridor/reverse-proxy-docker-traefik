@@ -9,6 +9,8 @@ entryPoints:
     address: ":80"
   websecure:
     address: ":443"
+  ping:
+    address: ":8082"
 
 # Access logs
 # accessLog: fields:
@@ -32,6 +34,9 @@ certificatesResolvers:
         entrypoint: web
       email: mail@somedomain.com
       storage: /etc/traefik/acme/acme.json
+
+ping:
+  entryPoint: "ping"
 
 api:
   dashboard: true

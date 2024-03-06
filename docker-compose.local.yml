@@ -18,6 +18,12 @@ services:
       - ./certificates:/certs:ro
       - ./configs/traefik.yml:/etc/traefik/traefik.yml
       - ./configs/dynamic:/etc/traefik/dynamic
+    healthcheck:
+      test: ["CMD", "traefik", "healthcheck", "--ping"]
+      interval: 5s
+      timeout: 1s
+      retries: 3
+      start_period: 10s
     networks:
       routing:
         ipv4_address: 10.100.100.10
