@@ -9,6 +9,8 @@ entryPoints:
     address: ":80"
   websecure:
     address: ":443"
+  ping:
+    address: ":8082"
 
 # Access logs
 # accessLog: fields:
@@ -23,6 +25,9 @@ providers:
   file:
     directory: /etc/traefik/dynamic
     watch: true
+
+ping:
+  entryPoint: "ping"
 
 api:
   dashboard: true
