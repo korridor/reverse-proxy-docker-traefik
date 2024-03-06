@@ -7,6 +7,9 @@ It uses:
  - docker-compose
  - Let's encrypt
 
+> [!NOTE]
+> Check out **solidtime - The modern Open Source Time-Tracker** at [solidtime.io](https://www.solidtime.io)
+
 ## Table of content
 
 - [Traefik 2 config](#traefik-2-config)
