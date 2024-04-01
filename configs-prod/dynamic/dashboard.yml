@@ -1,7 +1,7 @@
 http:
   routers:
     traefik:
-      rule: Host(`reverse-proxy.somedomain.com`)
+      rule: Host(`dashboard.orbesle.fr`)
       entryPoints:
         - websecure
       service: api@internal
@@ -10,7 +10,7 @@ http:
       tls:
         certResolver: letsencrypt
     traefik-http-redirect:
-      rule: Host(`reverse-proxy.somedomain.com`)
+      rule: Host(`dashboard.orbesle.fr`)
       entryPoints:
         - web
       service: api@internal
@@ -20,4 +20,4 @@ http:
     dashboardauth:
       basicAuth:
         users:
-          - "user1:$2y$05$/x10KYbrHtswyR8POT.ny.H4fFd1n.0.IEiYiestWzE1QFkYIEI3m"
+          - "admin:$apr1$RCWYzRU0$Woqd4vtjsd4WWPDaXEsPw1"
