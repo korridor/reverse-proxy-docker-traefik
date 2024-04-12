@@ -1,0 +1,25 @@
+version: '3.8'
+networks:
+  routing:
+    driver: bridge
+services:
+  traefik:
+    image: traefik:2.11.0
+    restart: always
+    container_name: reverse_proxy_traefik
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./configs/traefik.yml:/etc/traefik/traefik.yml
+      - ./configs/dynamic:/etc/traefik/dynamic
+      - ./certificates/acme.json:/etc/traefik/acme/acme.json
+    healthcheck:
+      test: [ "CMD", "traefik", "healthcheck", "--ping" ]
+      interval: 5s
+      timeout: 1s
+      retries: 3
+      start_period: 10s
+    networks:
+      - routing

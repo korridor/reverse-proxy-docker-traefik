@@ -1,0 +1,28 @@
+version: '3.8'
+
+networks:
+  traefik_routing:
+    external: true
+    name: reverse-proxy-docker-traefik_routing
+
+services:
+  pingvin-share:
+    image: stonith404/pingvin-share
+    container_name: pingvin-share
+    restart: unless-stopped
+    volumes:
+      - "./data:/opt/app/backend/data"
+      - "./data/images:/opt/app/frontend/public/img"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=reverse-proxy-docker-traefik_routing"
+      - "traefik.http.routers.pingvin-share.rule=Host(`share.orbesle.fr`)"
+      - "traefik.http.routers.pingvin-share.tls=true"
+      - "traefik.http.routers.pingvin-share.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.pingvin-share.entrypoints=websecure"
+      # Redirection HTTP vers HTTPS
+      - "traefik.http.routers.pingvin-share-http.rule=Host(`share.orbesle.fr`)"
+      - "traefik.http.routers.pingvin-share-http.entrypoints=web"
+      - "traefik.http.routers.pingvin-share-http.middlewares=redirect-to-https@file"
+    networks:
+      - traefik_routing

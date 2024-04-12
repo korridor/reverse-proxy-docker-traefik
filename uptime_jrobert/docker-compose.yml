@@ -1,0 +1,27 @@
+version: '3.3'
+
+networks:
+  traefik_routing:
+    external: true
+    name: reverse-proxy-docker-traefik_routing
+
+services:
+  uptime-kuma:
+    image: louislam/uptime-kuma:1
+    container_name: uptime-kuma
+    volumes:
+      - ./uptime-kuma-data:/app/data
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=reverse-proxy-docker-traefik_routing"
+      - "traefik.http.routers.uptime-kuma.rule=Host(`uptime.besle.org`)"
+      - "traefik.http.routers.uptime-kuma.tls=true"
+      - "traefik.http.routers.uptime-kuma.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.uptime-kuma.entrypoints=websecure"
+      # Redirection HTTP vers HTTPS
+      - "traefik.http.routers.uptime-kuma-http.rule=Host(`uptime.besle.org`)"
+      - "traefik.http.routers.uptime-kuma-http.entrypoints=web"
+      - "traefik.http.routers.uptime-kuma-http.middlewares=redirect-to-https@file"
+    restart: always
+    networks:
+      - traefik_routing
