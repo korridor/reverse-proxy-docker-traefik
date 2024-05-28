@@ -17,16 +17,17 @@ It uses:
   - [Production setup](#production-setup)
     - [Setting up traefik](#setting-up-traefik)
     - [Traefik dashboard](#traefik-dashboard)
-    - [Connect docker-compose service to reverse-proxy](#connect-docker-compose-service-to-reverse-proxy)
+    - [Connect docker compose service to reverse-proxy](#connect-docker-compose-service-to-reverse-proxy)
     - [SSL configuration](#ssl-configuration)
     - [Global middlewares](#global-middlewares)
     - [Access Logs](#access-logs)
   - [Setup for local development](#setup-for-local-development)
     - [Setting up traefik](#setting-up-traefik-1)
     - [Traefik dashboard](#traefik-dashboard-1)
-    - [Connect docker-compose service to reverse-proxy](#connect-docker-compose-service-to-reverse-proxy-1)
+    - [Connect docker compose service to reverse-proxy](#connect-docker-compose-service-to-reverse-proxy-1)
     - [Enable SSL locally](#enable-ssl-locally)
-    - [Enable SSL in the docker-compose file](#enable-ssl-in-the-docker-compose-file)
+    - [Enable SSL in the docker compose file](#enable-ssl-in-the-docker-compose-file)
+  - [FAQ](#faq)
   - [Credits](#credits)
   - [License](#license)
 
@@ -79,11 +80,11 @@ It uses:
     ```
 6. Start container
    ```bash
-   docker-compose up -d
+   docker compose up -d
    ```
 7. Check that traefik is running smoothly
    ```bash
-   docker-compose logs
+   docker compose logs
    ```
 
 ### Traefik dashboard
@@ -94,7 +95,7 @@ https://reverse-proxy.somedomain.com
 ```
 The dashboard shows you the configured routers, services, middleware, etc.
 
-### Connect docker-compose service to reverse-proxy
+### Connect docker compose service to reverse-proxy
 
 ```yaml
 version: '3.8'
@@ -235,11 +236,11 @@ accessLog: {}
    ```
 4. Start container
    ```bash
-   docker-compose up -d
+   docker compose up -d
    ```
 5. Check that traefik is running smoothly
    ```bash
-   docker-compose logs
+   docker compose logs
    ```
 
 ### Traefik dashboard
@@ -250,7 +251,7 @@ http://reverse-proxy.test
 ```
 The dashboard shows you the configured routers, services, middlewares, etc.
 
-### Connect docker-compose service to reverse-proxy
+### Connect docker compose service to reverse-proxy
 
 ```yaml
 version: '3.8'
@@ -323,7 +324,7 @@ cd certificates
 mkcert -key-file local.key.pem -cert-file local.cert.pem "*.local" "*.test" "*.someservice.test" "*.someservice.local"
 ```
 
-### Enable SSL in the docker-compose file
+### Enable SSL in the docker compose file
 
 ```yaml
 version: '3.8'
