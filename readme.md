@@ -101,8 +101,8 @@ The dashboard shows you the configured routers, services, middleware, etc.
 version: '3.8'
 networks:
   frontend:
-    external:
-      name: reverse-proxy-docker-traefik_routing
+    external: true
+    name: reverse-proxy-docker-traefik_routing
 services:
   someservice:
     restart: always
@@ -257,8 +257,8 @@ The dashboard shows you the configured routers, services, middlewares, etc.
 version: '3.8'
 networks:
   frontend:
-    external:
-      name: reverse-proxy-docker-traefik_routing
+    external: true
+    name: reverse-proxy-docker-traefik_routing
 services:
   someservice:
     restart: always
@@ -330,8 +330,8 @@ mkcert -key-file local.key.pem -cert-file local.cert.pem "*.local" "*.test" "*.s
 version: '3.8'
 networks:
   frontend:
-    external:
-      name: reverse-proxy-docker-traefik_routing
+    external: true
+    name: reverse-proxy-docker-traefik_routing
 services:
   someservice:
     restart: always
