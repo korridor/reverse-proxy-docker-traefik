@@ -1,35 +1,32 @@
-# Traefik 2 config
+# Traefik Setup with Docker Compose
 
-
-This is a resuseable traefik config for usage on a virtual server or for local debelopment using docker-compose.   
+This is a reusable Traefik config for usage on a virtual server or for local development using Docker Compose.   
 It uses:
- - Traefik 2
- - docker-compose
- - Let's encrypt
+ - [Traefik 3](https://traefik.io/traefik/)
+ - [Docker](https://www.docker.com/)
+ - [Let's encrypt](https://letsencrypt.org/) (Optional)
 
 > [!NOTE]
 > Check out **solidtime - The modern Open Source Time-Tracker** at [solidtime.io](https://www.solidtime.io)
 
 ## Table of content
 
-- [Traefik 2 config](#traefik-2-config)
-  - [Table of content](#table-of-content)
-  - [Production setup](#production-setup)
-    - [Setting up traefik](#setting-up-traefik)
-    - [Traefik dashboard](#traefik-dashboard)
-    - [Connect docker compose service to reverse-proxy](#connect-docker-compose-service-to-reverse-proxy)
-    - [SSL configuration](#ssl-configuration)
-    - [Global middlewares](#global-middlewares)
-    - [Access Logs](#access-logs)
-  - [Setup for local development](#setup-for-local-development)
-    - [Setting up traefik](#setting-up-traefik-1)
-    - [Traefik dashboard](#traefik-dashboard-1)
-    - [Connect docker compose service to reverse-proxy](#connect-docker-compose-service-to-reverse-proxy-1)
-    - [Enable SSL locally](#enable-ssl-locally)
-    - [Enable SSL in the docker compose file](#enable-ssl-in-the-docker-compose-file)
-  - [FAQ](#faq)
-  - [Credits](#credits)
-  - [License](#license)
+ * [Production setup](#production-setup)
+    + [Setting up traefik](#setting-up-traefik)
+    + [Traefik dashboard](#traefik-dashboard)
+    + [Connect docker compose service to reverse-proxy](#connect-docker-compose-service-to-reverse-proxy)
+    + [SSL configuration](#ssl-configuration)
+    + [Global middlewares](#global-middlewares)
+    + [Access Logs](#access-logs)
+ * [Setup for local development](#setup-for-local-development)
+    + [Setting up traefik](#setting-up-traefik-1)
+    + [Traefik dashboard](#traefik-dashboard-1)
+    + [Connect docker compose service to reverse-proxy](#connect-docker-compose-service-to-reverse-proxy-1)
+    + [Enable SSL locally](#enable-ssl-locally)
+    + [Enable SSL in the docker compose file](#enable-ssl-in-the-docker-compose-file)
+ * [FAQ](#faq)
+ * [Credits](#credits)
+ * [License](#license)
 
 ## Production setup
 
@@ -82,14 +79,14 @@ It uses:
    ```bash
    docker compose up -d
    ```
-7. Check that traefik is running smoothly
+7. Check that Traefik is running smoothly
    ```bash
    docker compose logs
    ```
 
 ### Traefik dashboard
 
-The traefik dashboard is now available under:
+The Traefik dashboard is now available under:
 ```
 https://reverse-proxy.somedomain.com
 ```
@@ -198,7 +195,7 @@ Examples:
 
 ### Access Logs
 
-To enable the traefik access logs in the production configuration, open the file `traefik.yml` within the config folder and uncomment the `accessLog` section.
+To enable the Traefik access logs in the production configuration, open the file `traefik.yml` within the config folder and uncomment the `accessLog` section.
 
 ```yml
 # Access logs
@@ -207,7 +204,7 @@ accessLog: {}
 
 ## Setup for local development
 
-### Setting up traefik
+### Setting up Traefik
 
 1. Clone repository
    ```bash
@@ -245,7 +242,7 @@ accessLog: {}
 
 ### Traefik dashboard
 
-The traefik dashboard is now available under:
+The Traefik dashboard is now available under:
 ```
 http://reverse-proxy.test
 ```
@@ -286,7 +283,7 @@ services:
 
 **Specifying port if service exposes multiple ports**
 
-If your service exposes multiple ports traefik does not know which one it should use.
+If your service exposes multiple ports Traefik does not know which one it should use.
 With this config line you can select one:
 
 ```yaml
@@ -347,6 +344,16 @@ services:
     networks:
      - frontend
      - ...
+```
+
+## FAQ
+
+**I have a IPv6-only server, what do I need to change?**
+
+GitHub currently does not support cloning a repository over IPv6. You can clone from my Codeberg mirror instead:
+
+```bash
+git clone https://codeberg.org/korridor/reverse-proxy-docker-traefik.git
 ```
 
 ## Credits
