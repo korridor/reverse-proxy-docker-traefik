@@ -13,10 +13,11 @@ entryPoints:
     address: ":8082"
 
 # Access logs
-# accessLog: fields:
-#   headers:
-#     names:
-#       User-Agent: keep
+#accessLog:
+#  fields:
+#    headers:
+#      names:
+#        User-Agent: keep
 
 providers:
   docker:
