@@ -1,0 +1,30 @@
+version: '3'
+services:
+  portainer:
+    image: portainer/portainer-ce:latest
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data
+    restart: always
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=reverse-proxy-docker-traefik_routing"
+      - "traefik.http.services.portainer.loadbalancer.server.port=9000"
+      - "traefik.http.routers.portainer.rule=Host(`portainer.orbesle.fr`)"
+      - "traefik.http.routers.portainer.tls=true"
+      - "traefik.http.routers.portainer.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.portainer.entrypoints=websecure"
+      # Redirection HTTP vers HTTPS
+      - "traefik.http.routers.portainer-http.rule=Host(`portainer.orbesle.fr`)"
+      - "traefik.http.routers.portainer-http.entrypoints=web"
+      - "traefik.http.routers.portainer-http.middlewares=redirect-to-https@file"
+    networks:
+      - traefik_routing
+
+volumes:
+  portainer_data:
+
+networks:
+  traefik_routing:
+    external: true
+    name: reverse-proxy-docker-traefik_routing
