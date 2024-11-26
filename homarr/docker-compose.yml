@@ -1,10 +1,10 @@
 services:
   homarr:
     image: ghcr.io/ajnart/homarr:latest
-    container_name: homarr_new # Changé pour éviter le conflit, si nécessaire
+    container_name: homarr
     restart: unless-stopped
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock # Optional, only if you want docker integration
+      - /var/run/docker.sock:/var/run/docker.sock
       - ./homarr/configs:/app/data/configs
       - ./homarr/icons:/app/public/icons
       - ./homarr/data:/data
