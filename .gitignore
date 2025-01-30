@@ -1,3 +1,5 @@
 certificates/*
 .idea
 configs
+.env
+sonarqube/.env

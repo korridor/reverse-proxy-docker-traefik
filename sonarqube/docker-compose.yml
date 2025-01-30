@@ -1,14 +1,17 @@
 version: '3'
 
+# Sensitive data is stored in .env file
+# Make sure to change default values in production
+
 services:
   sonarqube:
     image: sonarqube:lts-community
     depends_on:
       - sonar_db
     environment:
-      SONAR_JDBC_URL: jdbc:postgresql://sonar_db:5432/sonar
-      SONAR_JDBC_USERNAME: sonar
-      SONAR_JDBC_PASSWORD: sonar
+      SONAR_JDBC_URL: jdbc:postgresql://sonar_db:5432/${SONAR_DB_NAME}
+      SONAR_JDBC_USERNAME: ${SONAR_DB_USER}
+      SONAR_JDBC_PASSWORD: ${SONAR_DB_PASSWORD}
       SONAR_WEB_CONTEXT: "/"
       SONAR_WEB_HOST: "0.0.0.0"
       SONAR_WEB_PORT: "9000"
@@ -41,9 +44,9 @@ services:
   sonar_db:
     image: postgres:13
     environment:
-      POSTGRES_USER: sonar
-      POSTGRES_PASSWORD: sonar
-      POSTGRES_DB: sonar
+      POSTGRES_USER: ${SONAR_DB_USER}
+      POSTGRES_PASSWORD: ${SONAR_DB_PASSWORD}
+      POSTGRES_DB: ${SONAR_DB_NAME}
     ports:
       - "5433:5432"
     volumes:
