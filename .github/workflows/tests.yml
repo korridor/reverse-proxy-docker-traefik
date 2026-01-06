@@ -17,6 +17,10 @@ jobs:
             sudo echo "127.0.0.1 hello-world.test" | sudo tee -a /etc/hosts
       -   name: 'Copy configuration files'
           run: cp -r configs-local configs
+      -   name: 'Create empty certificate files'
+          run: |
+            echo "{}" > certificates/acme.json
+            chmod 600 certificates/acme.json
       -   name: 'Start reverse proxy with local setup'
           run: docker compose -f docker-compose.local.yml up -d --wait
       -   name: 'Test dashboard'
@@ -25,6 +29,9 @@ jobs:
           run: cd examples && docker compose -f docker-compose.local.yml up -d
       -   name: 'Test hello-world'
           run: curl http://hello-world.test
+      -   name: 'Output logs'
+          run: docker compose -f docker-compose.prod.yml logs
+
   prod-setup:
     runs-on: ubuntu-latest
     steps:
@@ -40,8 +47,12 @@ jobs:
             sudo echo "127.0.0.1 reverse-proxy.test" | sudo tee -a /etc/hosts
             sudo echo "127.0.0.1 hello-world.test" | sudo tee -a /etc/hosts
       -   name: 'Copy configuration files'
-          run: cp -r configs-local configs
-      -   name: 'Start reverse proxy with local setup'
+          run: cp -r configs-prod configs
+      -   name: 'Create empty certificate files'
+          run: |
+            echo "{}" > certificates/acme.json
+            chmod 600 certificates/acme.json
+      -   name: 'Start reverse proxy with production setup'
           run: docker compose -f docker-compose.prod.yml up -d --wait
       -   name: 'Test dashboard'
           run: curl http://reverse-proxy.test/dashboard/#/
@@ -49,3 +60,5 @@ jobs:
           run: cd examples && docker compose -f docker-compose.prod.yml up -d
       -   name: 'Test hello-world'
           run: curl http://hello-world.test
+      -   name: 'Output logs'
+          run: docker compose -f docker-compose.prod.yml logs
