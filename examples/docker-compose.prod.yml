@@ -1,7 +1,7 @@
 version: '3.8'
 services:
   hello-world:
-    image: nginx
+    image: nginx:latest
     labels:
       - "traefik.enable=true"
       - "traefik.docker.network=reverse-proxy-docker-traefik_routing"
